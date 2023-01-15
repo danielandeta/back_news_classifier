@@ -1,14 +1,13 @@
 
 from fastapi import APIRouter
-
-from models.xsvmc_model.model import modelo, contextualized_prediction
+from models.xsvmc_model.model import contextualized_prediction
 
 app_home = APIRouter()
-modelo= modelo()
 
 @app_home.get('/', tags=["Intro"])
 async def hello():
-    return {"message": "Hello!"}
+    prueba = contextualized_prediction("Hola a todos")
+    return {"message": prueba}
 
 
 @app_home.get('/bye', tags=["Intro"])

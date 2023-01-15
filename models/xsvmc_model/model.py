@@ -82,12 +82,12 @@ def contextualized_prediction(text):
     pred = topK[i]
     mu_misv = SVs[pred.eval.mu_hat.misv_idx][1:original_len-1]
     nu_misv = SVs[pred.eval.nu_hat.misv_idx][1:original_len-1]
-    b64_pro = render_text(clean_text, mu_misv)
-    b64_contra = render_text(clean_text, nu_misv)
-    print(b64_contra)
-    response.append({
-      'clase': pred.class_name,
-      'favor': b64_pro,
-      'contra': b64_contra
-    })
+    # b64_pro = render_text(clean_text, mu_misv)
+    # b64_contra = render_text(clean_text, nu_misv)
+    # print(b64_contra)
+    # response.append({
+    #   'clase': pred.class_name,
+    #   'favor': b64_pro,
+    #   'contra': b64_contra
+    # })
   return response
