@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from joblib import load
 from routes.v1.xsvmc_predict import app_xsvmc_predict_v1
 from routes.home import app_home
+from xsvmlib.xsvmc import xSVMC
+from xsvmlib.xmodels import xAAD, xAIFSElement, xPrediction
 
 
 app = FastAPI(title="XSVMC ML API", description="API for xsvmc ml model", version="1.0")
