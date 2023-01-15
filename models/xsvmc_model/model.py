@@ -3,7 +3,6 @@ from PIL import Image, ImageFont, ImageDraw
 from joblib import load
 from transformers import BertTokenizer
 from keras.utils import pad_sequences
-from xsvmlib.xsvmc import xSVMC
 import base64
 from io import BytesIO
 
@@ -26,7 +25,7 @@ def create_img(l_text, prob, y_size):
   offset_y = 10
   offset_x = 10
   img_x = 800
-  img_y = 600
+  img_y = y_size
 
   img = Image.new(mode="RGBA", size=(img_x, img_y), color = (255, 255, 255))
   txt = Image.new('RGBA', img.size, (255,255,255,0))
@@ -60,7 +59,8 @@ def create_img(l_text, prob, y_size):
   return img_str
 
 def render_text(text, misv):
-  y_size = int(len(text) / 60 * 25)
+  caracteres = " ".join(text)
+  y_size = int(len(caracteres) / 60 * 18)
   values = misv
   max_value = max(values)
   prob = (values / max_value)
