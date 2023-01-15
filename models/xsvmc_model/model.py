@@ -3,9 +3,10 @@ from PIL import Image, ImageFont, ImageDraw
 from joblib import load
 from transformers import BertTokenizer
 from keras.utils import pad_sequences
+from xsvmlib.xsvmc import xSVMC
 
 max_len = 4433
-
+    
 clf = load("models/xsvmc_model/xsvmc.joblib")
 SVs = clf.support_vectors_
 

@@ -1,11 +1,11 @@
-import models.ml.classifier as clf
+import models.xsvmc_model.classifier as clf
 from fastapi import FastAPI
 from joblib import load
 from routes.v1.xsvmc_predict import app_xsvmc_predict_v1
 from routes.home import app_home
 
 
-app = FastAPI(title="Iris ML API", description="API for iris dataset ml model", version="1.0")
+app = FastAPI(title="XSVMC ML API", description="API for xsvmc ml model", version="1.0")
 
 
 @app.on_event('startup')
