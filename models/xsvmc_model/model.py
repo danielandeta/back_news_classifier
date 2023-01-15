@@ -7,7 +7,7 @@ from xsvmlib.xsvmc import xSVMC
 import base64
 from io import BytesIO
 
-max_len = 4433
+max_len = 4500
     
 clf = load("models/xsvmc_model/xsvmc.joblib")
 SVs = clf.support_vectors_
@@ -31,7 +31,7 @@ def create_img(l_text, prob, y_size):
   img = Image.new(mode="RGBA", size=(img_x, img_y), color = (255, 255, 255))
   txt = Image.new('RGBA', img.size, (255,255,255,0))
   draw = ImageDraw.Draw(txt)
-  font = ImageFont.truetype("fonts\SpaceMono-Bold.ttf", 16)
+  font = ImageFont.truetype("models/xsvmc_model/fonts/SpaceMono-Bold.ttf", 16)
 
   last_pos_x = 0
   combined = 0
@@ -64,7 +64,7 @@ def render_text(text, misv):
   values = misv
   max_value = max(values)
   prob = (values / max_value)
-  create_img(text, prob, y_size)
+  return create_img(text, prob, y_size)
 
 def preprocess_text(text):
   encoded_input = tokenizer(text, return_tensors='tf')
@@ -82,12 +82,11 @@ def contextualized_prediction(text):
     pred = topK[i]
     mu_misv = SVs[pred.eval.mu_hat.misv_idx][1:original_len-1]
     nu_misv = SVs[pred.eval.nu_hat.misv_idx][1:original_len-1]
-    # b64_pro = render_text(clean_text, mu_misv)
-    # b64_contra = render_text(clean_text, nu_misv)
-    # print(b64_contra)
-    # response.append({
-    #   'clase': pred.class_name,
-    #   'favor': b64_pro,
-    #   'contra': b64_contra
-    # })
+    b64_pro = render_text(clean_text, mu_misv)
+    b64_contra = render_text(clean_text, nu_misv)
+    response.append({
+      'clase': pred.class_name,
+      'favor': b64_pro,
+      'contra': b64_contra
+    })
   return response
