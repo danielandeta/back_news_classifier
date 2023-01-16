@@ -87,6 +87,8 @@ def contextualized_prediction(text):
     response.append({
       'clase': pred.class_name,
       'favor': b64_pro,
-      'contra': b64_contra
+      'favor_value': pred.eval.mu_hat.level,
+      'contra': b64_contra,
+      'contra_value': pred.eval.nu_hat.level
     })
   return response
